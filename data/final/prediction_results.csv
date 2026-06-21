@@ -1,0 +1,16 @@
+feature_set,model,n_samples,cv_r2_mean,cv_r2_std,cv_mae,cv_rmse,train_r2
+Baseline (ELO only),LinearRegression,36,-0.952,1.782,1.624,1.917,0.033
+Baseline (ELO only),RandomForest,36,-1.339,1.993,1.695,2.135,0.382
+Baseline (ELO only),GradientBoosting,36,-2.273,3.603,1.858,2.315,0.581
+Rain only,LinearRegression,36,-2.01,2.35,1.862,2.372,0.071
+Rain only,RandomForest,36,-1.328,2.024,1.697,2.115,0.39
+Rain only,GradientBoosting,36,-1.996,3.215,1.792,2.24,0.623
+Heat only,LinearRegression,36,-2.782,5.088,1.774,2.165,0.173
+Heat only,RandomForest,36,-2.373,4.425,1.85,2.135,0.49
+Heat only,GradientBoosting,36,-3.036,5.594,1.978,2.247,0.73
+Rain+Heat,LinearRegression,36,-3.65,5.486,2.164,2.539,0.196
+Rain+Heat,RandomForest,36,-2.441,4.375,1.895,2.2,0.486
+Rain+Heat,GradientBoosting,36,-2.932,5.327,2.016,2.256,0.728
+Full model,LinearRegression,36,-11.18,5.943,3.666,5.328,0.314
+Full model,RandomForest,36,-2.147,3.843,1.835,2.149,0.539
+Full model,GradientBoosting,36,-3.086,5.411,1.989,2.315,0.78

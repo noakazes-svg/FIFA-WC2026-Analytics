@@ -1,0 +1,62 @@
+# ─── Python ──────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+*.whl
+
+# ─── Virtual environments ─────────────────────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+.conda/
+
+# ─── Jupyter ─────────────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# ─── OS artefacts ────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─── IDE ─────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.code-workspace
+
+# ─── Large / sensitive files ─────────────────────────────────────────────────
+# Notebook outputs are large; commit source-only versions if needed
+# (Uncomment the next line to exclude all executed notebook outputs)
+# *.ipynb
+
+# API keys / credentials — never commit these
+.env
+secrets.json
+credentials.json
+*.key
+
+# ─── Temporary / generated ───────────────────────────────────────────────────
+*.tmp
+*.bak
+*.swp
+*~
+
+# ─── Large data files (add specific paths if needed) ─────────────────────────
+# The project data files are small (<1 MB each) and safe to commit.
+# If you later add large raw downloads, add them here:
+# data/raw/large_file.csv
+
+# ─── Project-specific exclusions ─────────────────────────────────────────────
+*.zip
+*.tar.gz
+# Loose PNGs in root (LinkedIn assets go in assets/ instead)
+/*.png
+/*.jpg
+

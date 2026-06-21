@@ -1,0 +1,38 @@
+match_id,match_date,match_day_of_week,kickoff_time_local,competition_stage,group,home_team,away_team,stadium,city,state_or_region,country,latitude,longitude,venue_type,attendance
+WC2026-001,2026-06-11,Thursday,20:00,Group Stage,A,Mexico,South Africa,Estadio Azteca,Mexico City,CDMX,Mexico,19.3029,-99.15,Open,80824.0
+WC2026-002,2026-06-11,Thursday,17:00,Group Stage,A,South Korea,Czechia,Estadio Akron,Guadalajara,Jalisco,Mexico,20.6898,-103.4672,Open,44985.0
+WC2026-003,2026-06-12,Friday,18:00,Group Stage,B,Canada,Bosnia-Herzegovina,BMO Field,Toronto,Ontario,Canada,43.6333,-79.4167,Open,43002.0
+WC2026-004,2026-06-12,Friday,15:00,Group Stage,D,USA,Paraguay,SoFi Stadium,Inglewood,California,USA,33.9535,-118.3392,Partial,70492.0
+WC2026-005,2026-06-13,Saturday,15:00,Group Stage,C,Brazil,Morocco,MetLife Stadium,East Rutherford,New Jersey,USA,40.8136,-74.0742,Open,80663.0
+WC2026-006,2026-06-13,Saturday,12:00,Group Stage,C,Haiti,Scotland,Gillette Stadium,Foxborough,Massachusetts,USA,42.0909,-71.2643,Open,64146.0
+WC2026-007,2026-06-13,Saturday,15:00,Group Stage,D,Australia,Turkiye,BC Place,Vancouver,British Columbia,Canada,49.2767,-123.1115,Covered,52497.0
+WC2026-008,2026-06-13,Saturday,18:00,Group Stage,B,Qatar,Switzerland,Levi's Stadium,Santa Clara,California,USA,37.4032,-121.9697,Open,67966.0
+WC2026-009,2026-06-14,Sunday,15:00,Group Stage,E,Germany,Curacao,NRG Stadium,Houston,Texas,USA,29.6847,-95.4107,Covered,68021.0
+WC2026-010,2026-06-14,Sunday,12:00,Group Stage,E,Ivory Coast,Ecuador,Lincoln Financial Field,Philadelphia,Pennsylvania,USA,39.9008,-75.1675,Open,68274.0
+WC2026-011,2026-06-14,Sunday,17:00,Group Stage,F,Netherlands,Japan,AT&T Stadium,Arlington,Texas,USA,32.748,-97.093,Covered,69285.0
+WC2026-012,2026-06-14,Sunday,20:00,Group Stage,F,Sweden,Tunisia,Estadio BBVA,Monterrey,Nuevo León,Mexico,25.6694,-100.2437,Open,50987.0
+WC2026-013,2026-06-15,Monday,12:00,Group Stage,H,Spain,Cape Verde,Mercedes-Benz Stadium,Atlanta,Georgia,USA,33.7555,-84.401,Covered,67640.0
+WC2026-014,2026-06-15,Monday,12:00,Group Stage,G,Belgium,Egypt,Lumen Field,Seattle,Washington,USA,47.5952,-122.3316,Partial,66775.0
+WC2026-015,2026-06-15,Monday,18:00,Group Stage,H,Saudi Arabia,Uruguay,Hard Rock Stadium,Miami Gardens,Florida,USA,25.958,-80.2389,Open,62764.0
+WC2026-016,2026-06-15,Monday,18:00,Group Stage,G,Iran,New Zealand,SoFi Stadium,Inglewood,California,USA,33.9535,-118.3392,Partial,70108.0
+WC2026-017,2026-06-16,Tuesday,18:00,Group Stage,I,France,Senegal,MetLife Stadium,East Rutherford,New Jersey,USA,40.8136,-74.0742,Open,80545.0
+WC2026-018,2026-06-16,Tuesday,15:00,Group Stage,I,Iraq,Norway,Gillette Stadium,Foxborough,Massachusetts,USA,42.0909,-71.2643,Open,63106.0
+WC2026-019,2026-06-16,Tuesday,17:00,Group Stage,J,Argentina,Algeria,Arrowhead Stadium,Kansas City,Missouri,USA,39.0489,-94.4839,Open,69045.0
+WC2026-020,2026-06-16,Tuesday,18:00,Group Stage,J,Austria,Jordan,Levi's Stadium,Santa Clara,California,USA,37.4032,-121.9697,Open,68527.0
+WC2026-021,2026-06-17,Wednesday,17:00,Group Stage,K,Portugal,DR Congo,NRG Stadium,Houston,Texas,USA,29.6847,-95.4107,Covered,68777.0
+WC2026-022,2026-06-17,Wednesday,17:00,Group Stage,L,England,Croatia,AT&T Stadium,Arlington,Texas,USA,32.748,-97.093,Covered,70389.0
+WC2026-023,2026-06-17,Wednesday,15:00,Group Stage,L,Ghana,Panama,BMO Field,Toronto,Ontario,Canada,43.6333,-79.4167,Open,42942.0
+WC2026-024,2026-06-17,Wednesday,20:00,Group Stage,K,Uzbekistan,Colombia,Estadio Azteca,Mexico City,CDMX,Mexico,19.3029,-99.15,Open,80824.0
+WC2026-025,2026-06-18,Thursday,18:00,Group Stage,A,Czechia,South Africa,Mercedes-Benz Stadium,Atlanta,Georgia,USA,33.7555,-84.401,Covered,
+WC2026-026,2026-06-18,Thursday,17:00,Group Stage,A,Mexico,South Korea,Estadio Akron*,Guadalajara,Jalisco,Mexico,20.6898,-103.4672,Open,
+WC2026-027,2026-06-18,Thursday,15:00,Group Stage,B,Switzerland,Bosnia-Herzegovina,,,,,,,Unknown,
+WC2026-028,2026-06-18,Thursday,12:00,Group Stage,B,Canada,Qatar,,,,,,,Unknown,
+WC2026-029,2026-06-19,Friday,18:00,Group Stage,C,Morocco,Scotland,,,,,,,Unknown,
+WC2026-030,2026-06-19,Friday,15:00,Group Stage,C,Brazil,Haiti,,,,,,,Unknown,
+WC2026-031,2026-06-19,Friday,12:00,Group Stage,D,USA,Australia,,,,,,,Unknown,
+WC2026-032,2026-06-19,Friday,18:00,Group Stage,D,Paraguay,Turkiye,,,,,,,Unknown,
+WC2026-033,2026-06-20,Saturday,18:00,Group Stage,E,Germany,Ivory Coast,BMO Field,Toronto,Ontario,Canada,43.6333,-79.4167,Open,43000.0
+WC2026-034,2026-06-20,Saturday,15:00,Group Stage,E,Ecuador,Curacao,,,,,,,Unknown,
+WC2026-035,2026-06-20,Saturday,18:00,Group Stage,F,Netherlands,Sweden,,,,,,,Unknown,
+WC2026-036,2026-06-20,Saturday,21:00,Group Stage,F,Japan,Tunisia,Estadio BBVA,Monterrey,Nuevo León,Mexico,25.6694,-100.2437,Open,
+WC2026-037,2026-06-21,Sunday,12:00,Group Stage,H,Spain,Saudi Arabia,Mercedes-Benz Stadium,Atlanta,Georgia,USA,33.7555,-84.401,Covered,

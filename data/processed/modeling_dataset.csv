@@ -1,0 +1,38 @@
+match_id,match_date,home_team,away_team,total_goals,elo_difference,home_elo,away_elo,home_avg_goals_before,away_avg_goals_before,home_avg_conceded_before,away_avg_conceded_before,rain_flag,precipitation_mm,precipitation_bucket,temperature_c,temperature_bucket,humidity_percent,humidity_bucket,heat_index_c,heat_index_bucket,wet_bulb_temperature_c,wet_bulb_bucket,wbgt_c,wind_speed_kmh,cloud_cover_percent,pressure_hpa,cooling_break_flag,cooling_break_count,venue_type
+WC2026-001,2026-06-11,Mexico,South Africa,,210,1890,1680,,,,,1.0,0.3,Light,16.8,Low,90.0,High,16.8,Low,15.62,Low,15.97,1.5,41.0,783.8,0.0,0.0,Open
+WC2026-002,2026-06-11,South Korea,Czechia,,95,1840,1745,,,,,1.0,0.3,Light,24.5,Medium,55.0,Medium,24.5,Low,18.32,Medium,20.17,8.7,38.0,835.4,0.0,0.0,Open
+WC2026-003,2026-06-12,Canada,Bosnia-Herzegovina,,165,1790,1625,,,,,0.0,0.0,None,26.0,Medium,41.0,Low,26.0,Low,17.37,Low,19.96,17.9,24.0,998.1,0.0,0.0,Open
+WC2026-004,2026-06-12,USA,Paraguay,,265,1900,1635,,,,,0.0,0.0,None,27.4,Medium,46.0,Low,28.59,Medium,19.39,Medium,21.79,13.4,5.0,1004.8,0.0,0.0,Partial
+WC2026-005,2026-06-13,Brazil,Morocco,,90,1985,1895,,,,,0.0,0.0,None,31.1,High,33.0,Low,31.1,Medium,19.88,Medium,23.25,11.8,13.0,1010.8,0.0,0.0,Open
+WC2026-006,2026-06-13,Haiti,Scotland,,-80,1660,1740,,,,,0.0,0.0,None,28.5,Medium,36.0,Low,28.5,Medium,18.46,Medium,21.47,12.7,0.0,999.6,0.0,0.0,Open
+WC2026-007,2026-06-13,Australia,Turkiye,,15,1835,1820,,,,,0.0,0.0,None,23.0,Medium,49.0,Low,23.0,Low,16.13,Low,18.19,12.0,41.0,1020.6,0.0,0.0,Covered
+WC2026-008,2026-06-13,Qatar,Switzerland,,-235,1630,1865,,,,,0.0,0.0,None,25.8,Medium,46.0,Low,25.8,Low,18.04,Medium,20.37,14.8,0.0,1009.2,0.0,0.0,Open
+WC2026-009,2026-06-14,Germany,Curacao,,340,1950,1610,,,,,1.0,0.2,Light,30.4,High,76.0,High,40.6,High,26.9,High,27.95,9.7,100.0,1012.2,0.0,0.0,Covered
+WC2026-010,2026-06-14,Ivory Coast,Ecuador,,-45,1755,1800,,,,,0.0,0.0,None,30.5,High,44.0,Low,31.81,Medium,21.63,Medium,24.29,16.2,77.0,1011.3,0.0,0.0,Open
+WC2026-011,2026-06-14,Netherlands,Japan,,85,1955,1870,,,,,0.0,0.0,None,27.8,Medium,72.0,High,33.13,Medium,23.84,Medium,25.03,17.3,27.0,992.4,0.0,0.0,Covered
+WC2026-012,2026-06-14,Sweden,Tunisia,,20,1800,1780,,,,,1.0,0.2,Light,25.5,Medium,85.0,High,25.5,Low,23.5,Medium,24.1,4.4,99.0,956.2,0.0,0.0,Open
+WC2026-013,2026-06-15,Spain,Cape Verde,,285,1970,1685,,,,,0.0,0.0,None,26.1,Medium,54.0,Medium,26.1,Low,19.57,Medium,21.53,11.2,89.0,979.1,0.0,0.0,Covered
+WC2026-014,2026-06-15,Belgium,Egypt,,195,1945,1750,,,,,0.0,0.0,None,27.5,Medium,38.0,Low,27.5,Medium,18.05,Medium,20.88,1.8,52.0,1016.7,0.0,0.0,Partial
+WC2026-015,2026-06-15,Saudi Arabia,Uruguay,,-215,1720,1935,,,,,1.0,0.3,Light,31.6,High,54.0,Medium,36.04,High,24.39,Medium,26.55,10.6,89.0,1014.4,0.0,0.0,Open
+WC2026-016,2026-06-15,Iran,New Zealand,,165,1805,1640,,,,,0.0,0.0,None,21.9,Medium,63.0,Medium,21.9,Low,17.12,Low,18.55,12.2,1.0,1009.1,0.0,0.0,Partial
+WC2026-017,2026-06-16,France,Senegal,,185,2015,1830,,,,,0.0,0.0,None,23.1,Medium,40.0,Low,23.1,Low,14.84,Low,17.32,17.3,55.0,1008.4,0.0,0.0,Open
+WC2026-018,2026-06-16,Iraq,Norway,,-100,1710,1810,,,,,0.0,0.0,None,23.8,Medium,36.0,Low,23.8,Low,14.74,Low,17.46,11.3,25.0,998.1,0.0,0.0,Open
+WC2026-019,2026-06-16,Argentina,Algeria,,225,2020,1795,,,,,0.0,0.0,None,26.7,Medium,42.0,Low,27.63,Medium,18.12,Medium,20.69,1.9,91.0,977.9,0.0,0.0,Open
+WC2026-020,2026-06-16,Austria,Jordan,,95,1785,1690,,,,,0.0,0.0,None,22.7,Medium,52.0,Medium,22.7,Low,16.31,Low,18.23,13.2,11.0,1011.9,0.0,0.0,Open
+WC2026-021,2026-06-17,Portugal,DR Congo,,300,1975,1675,,,,,0.0,0.0,None,30.0,High,70.0,High,37.49,High,25.6,High,26.92,12.3,44.0,1000.2,0.0,0.0,Covered
+WC2026-022,2026-06-17,England,Croatia,,110,1990,1880,,,,,0.0,0.0,None,32.8,High,53.0,Medium,38.16,High,25.26,High,27.52,20.6,7.0,980.0,0.0,0.0,Covered
+WC2026-023,2026-06-17,Ghana,Panama,,105,1760,1655,,,,,1.0,0.1,None,20.4,Medium,65.0,Medium,20.4,Low,16.01,Low,17.33,15.2,98.0,993.9,0.0,0.0,Open
+WC2026-024,2026-06-17,Uzbekistan,Colombia,,-320,1600,1920,,,,,1.0,0.2,Light,17.9,Low,82.0,High,17.9,Low,15.75,Low,16.39,1.1,100.0,786.2,0.0,0.0,Open
+WC2026-025,2026-06-18,Czechia,South Africa,,65,1745,1680,1.0,0.0,2.0,2.0,1.0,3.0,Light,22.2,Medium,97.0,High,22.2,Low,21.84,Medium,21.95,8.8,100.0,976.3,0.0,0.0,Covered
+WC2026-026,2026-06-18,Mexico,South Korea,,50,1890,1840,2.0,2.0,0.0,1.0,1.0,0.8,Light,21.2,Medium,73.0,High,21.2,Low,17.79,Low,18.81,9.7,86.0,838.0,0.0,0.0,Open
+WC2026-027,2026-06-18,Switzerland,Bosnia-Herzegovina,,240,1865,1625,1.0,1.0,1.0,1.0,,,,,,,,,,,,,,,,,,Unknown
+WC2026-028,2026-06-18,Canada,Qatar,,160,1790,1630,1.0,1.0,1.0,1.0,,,,,,,,,,,,,,,,,,Unknown
+WC2026-029,2026-06-19,Morocco,Scotland,,155,1895,1740,1.0,1.0,1.0,0.0,,,,,,,,,,,,,,,,,,Unknown
+WC2026-030,2026-06-19,Brazil,Haiti,,325,1985,1660,1.0,0.0,1.0,1.0,,,,,,,,,,,,,,,,,,Unknown
+WC2026-031,2026-06-19,USA,Australia,,65,1900,1835,4.0,2.0,1.0,0.0,,,,,,,,,,,,,,,,,,Unknown
+WC2026-032,2026-06-19,Paraguay,Turkiye,,-185,1635,1820,0.0,1.0,2.0,4.0,,,,,,,,,,,,,,,,,,Unknown
+WC2026-033,2026-06-20,Germany,Ivory Coast,,195,1950,1755,1.0,7.0,0.0,1.0,0.0,0.0,None,22.9,Medium,39.0,Low,22.9,Low,14.52,Low,17.03,10.5,54.0,999.1,0.0,0.0,Open
+WC2026-034,2026-06-20,Ecuador,Curacao,,190,1800,1610,0.0,1.0,1.0,7.0,,,,,,,,,,,,,,,,,,Unknown
+WC2026-035,2026-06-20,Netherlands,Sweden,,155,1955,1800,2.0,5.0,2.0,1.0,,,,,,,,,,,,,,,,,,Unknown
+WC2026-036,2026-06-20,Japan,Tunisia,,90,1870,1780,2.0,1.0,2.0,5.0,0.0,0.0,None,23.5,Medium,96.0,High,23.5,Low,23.01,Medium,23.16,4.1,40.0,955.1,0.0,0.0,Open
+WC2026-037,2026-06-21,Spain,Saudi Arabia,,250,1970,1720,0.0,1.0,0.0,1.0,1.0,0.2,Light,26.5,Medium,69.0,Medium,26.5,Low,22.19,Medium,23.48,4.7,91.0,979.3,0.0,0.0,Covered

@@ -1,0 +1,17 @@
+stadium,city,country,latitude,longitude,stadium_capacity,timezone,utc_offset_hours
+Estadio Azteca,Mexico City,Mexico,19.3029,-99.15,87523,America/Mexico_City,-6
+Estadio Akron,Zapopan,Mexico,20.6898,-103.4672,44985,America/Mexico_City,-6
+Estadio BBVA,Guadalupe,Mexico,25.6694,-100.2437,53500,America/Mexico_City,-6
+BMO Field,Toronto,Canada,43.6333,-79.4167,45000,America/Toronto,-4
+SoFi Stadium,Inglewood,USA,33.9535,-118.3392,70240,America/Los_Angeles,-7
+MetLife Stadium,East Rutherford,USA,40.8136,-74.0742,82500,America/New_York,-4
+Gillette Stadium,Foxborough,USA,42.0909,-71.2643,65878,America/New_York,-4
+BC Place,Vancouver,Canada,49.2767,-123.1115,54500,America/Vancouver,-7
+Levi's Stadium,Santa Clara,USA,37.4032,-121.9697,70909,America/Los_Angeles,-7
+NRG Stadium,Houston,USA,29.6847,-95.4107,72220,America/Chicago,-5
+Lincoln Financial Field,Philadelphia,USA,39.9008,-75.1675,69176,America/New_York,-4
+AT&T Stadium,Arlington,USA,32.748,-97.093,80000,America/Chicago,-5
+Mercedes-Benz Stadium,Atlanta,USA,33.7555,-84.401,71000,America/New_York,-4
+Lumen Field,Seattle,USA,47.5952,-122.3316,69000,America/Los_Angeles,-7
+Hard Rock Stadium,Miami Gardens,USA,25.958,-80.2389,64767,America/New_York,-4
+Arrowhead Stadium,Kansas City,USA,39.0489,-94.4839,76416,America/Chicago,-5

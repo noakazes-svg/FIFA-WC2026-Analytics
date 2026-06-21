@@ -1,0 +1,42 @@
+tournament:
+  name: "FIFA World Cup 2026"
+  start_date: "2026-06-11"
+  end_date: "2026-07-19"
+
+data_sources:
+  results:
+    provider: "espn"
+    scoreboard_url: "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard"
+    rate_limit_seconds: 1.0
+    timeout_seconds: 15
+  weather_archive:
+    provider: "open-meteo"
+    base_url: "https://archive-api.open-meteo.com/v1/archive"
+    rate_limit_seconds: 0.35
+    timeout_seconds: 15
+  weather_forecast:
+    provider: "open-meteo"
+    base_url: "https://api.open-meteo.com/v1/forecast"
+    rate_limit_seconds: 0.35
+    timeout_seconds: 15
+
+paths:
+  raw: "data/raw"
+  processed: "data/processed"
+  final: "data/final"
+  external: "data/external"
+  predictions: "data/predictions"
+  logs: "logs"
+  reports: "reports"
+
+model:
+  retrain_after_n_new_matches: 3
+  cv_folds: 5
+  random_seed: 42
+  n_estimators: 200
+  max_depth: 4
+
+update:
+  lookback_days: 3         # re-check matches from past N days (handles delayed results)
+  max_api_retries: 3
+  retry_delay_seconds: 5

@@ -1,0 +1,73 @@
+name: Daily Match Update
+
+on:
+  schedule:
+    # Runs at 09:00 UTC daily — after most matches finish (kickoffs are 12:00–23:00 local / 17:00–06:00 UTC)
+    - cron: '0 9 * * *'
+  workflow_dispatch:
+    inputs:
+      date:
+        description: 'Specific date to process (YYYY-MM-DD). Leave blank for auto.'
+        required: false
+        type: string
+      dry_run:
+        description: 'Dry run (no file writes)'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run daily update
+        run: |
+          if [ -n "${{ inputs.date }}" ]; then
+            ARGS="--date ${{ inputs.date }}"
+          else
+            ARGS="--lookback 2"
+          fi
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            ARGS="$ARGS --dry-run"
+          fi
+          python run_daily_update.py $ARGS
+        env:
+          FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
+          PYTHONIOENCODING: utf-8
+
+      - name: Commit and push updated data
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "data: daily update ${{ github.run_id }} [${{ github.event.inputs.date || 'auto' }}]"
+          file_pattern: |
+            data/raw/*.csv
+            data/processed/*.csv
+            data/final/*.csv
+            data/external/*.csv
+            data/predictions/*.csv
+            logs/*.csv
+            reports/daily_summary.md
+          commit_user_name: "github-actions[bot]"
+          commit_user_email: "github-actions[bot]@users.noreply.github.com"
+          commit_author: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+
+      - name: No changes detected
+        if: steps.auto-commit.outputs.changes_detected == 'false'
+        run: echo "No new data — all matches already up to date."
