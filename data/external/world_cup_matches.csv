@@ -36,9 +36,9 @@ WC2026-034,Group Stage,E,2026-06-20,19:00,23:00,America/Toronto,Germany,Ivory Co
 WC2026-035,Group Stage,E,2026-06-20,18:00,23:00,America/Chicago,Ecuador,Curacao,0.0,0.0,Draw,Arrowhead Stadium,Kansas City,USA,76416,Completed
 WC2026-036,Group Stage,F,2026-06-20,20:00,02:00,America/Mexico_City,Japan,Tunisia,4.0,0.0,Japan,Estadio BBVA,Guadalupe,Mexico,53500,Completed
 WC2026-037,Group Stage,H,2026-06-21,12:00,16:00,America/New_York,Spain,Saudi Arabia,4.0,0.0,Spain,Mercedes-Benz Stadium,Atlanta,USA,71000,Completed
-WC2026-038,Group Stage,G,2026-06-21,12:00,19:00,America/Los_Angeles,Belgium,Iran,,,,SoFi Stadium,Inglewood,USA,70240,Scheduled
-WC2026-039,Group Stage,H,2026-06-21,18:00,22:00,America/New_York,Uruguay,Cape Verde,,,,Hard Rock Stadium,Miami Gardens,USA,64767,Scheduled
-WC2026-040,Group Stage,G,2026-06-21,18:00,01:00,America/Vancouver,New Zealand,Egypt,,,,BC Place,Vancouver,Canada,54500,Scheduled
+WC2026-038,Group Stage,G,2026-06-21,12:00,19:00,America/Los_Angeles,Belgium,Iran,0.0,0.0,Draw,SoFi Stadium,Inglewood,USA,70240,Completed
+WC2026-039,Group Stage,H,2026-06-21,18:00,22:00,America/New_York,Uruguay,Cape Verde,2.0,2.0,Draw,Hard Rock Stadium,Miami Gardens,USA,64767,Completed
+WC2026-040,Group Stage,G,2026-06-21,18:00,01:00,America/Vancouver,New Zealand,Egypt,1.0,3.0,Egypt,BC Place,Vancouver,Canada,54500,Completed
 WC2026-041,Group Stage,J,2026-06-22,12:00,17:00,America/Chicago,Argentina,Austria,,,,AT&T Stadium,Arlington,USA,80000,Scheduled
 WC2026-042,Group Stage,I,2026-06-22,17:00,21:00,America/New_York,France,Iraq,,,,Lincoln Financial Field,Philadelphia,USA,69176,Scheduled
 WC2026-043,Group Stage,I,2026-06-22,20:00,00:00,America/New_York,Norway,Senegal,,,,MetLife Stadium,East Rutherford,USA,82500,Scheduled

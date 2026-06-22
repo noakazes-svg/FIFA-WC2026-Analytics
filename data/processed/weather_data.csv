@@ -36,3 +36,6 @@ WC2026-034,,,,,,,,,,,,,,,,,,,,,,
 WC2026-035,,,,,,,,,,,,,,,,,,,,,,
 WC2026-036,Open-Meteo Archive API (archive-api.open-meteo.com),Clear,0.0,0.0,23.5,28.2,96.0,22.7,4.1,13.7,40.0,955.1,23.5,23.01,28.2,23.16,0.0,0.0,Low,Medium,Medium,High
 WC2026-037,Open-Meteo Archive API,Light Rain,1.0,0.2,26.5,30.4,69.0,20.2,4.7,16.6,91.0,979.3,26.5,22.19,30.4,23.48,0.0,0.0,Low,Medium,Medium,Medium
+WC2026-038,Open-Meteo Archive API,Clear,0.0,0.0,22.5,23.6,56.0,13.2,9.6,30.6,21.0,1008.4,22.5,16.7,23.6,18.44,0.0,0.0,Low,Low,Medium,Medium
+WC2026-039,Open-Meteo Archive API,Light Rain,1.0,0.4,31.4,35.3,58.0,22.0,7.0,17.6,82.0,1015.2,36.87,24.91,35.3,26.86,0.0,0.0,High,Medium,High,Medium
+WC2026-040,Open-Meteo Archive API,Clear,0.0,0.0,22.0,20.2,41.0,8.1,8.5,26.3,5.0,1013.7,22.0,14.1,20.2,16.47,0.0,0.0,Low,Low,Medium,Low

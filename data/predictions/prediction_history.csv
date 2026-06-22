@@ -1,8 +1,8 @@
 match_id,match_date,home_team,away_team,prediction_date,predicted_total_goals,probability_over_2_5,actual_total_goals,actual_home_goals,actual_away_goals,prediction_error
-WC2026-037,2026-06-21,Belgium,Iran,2026-06-21,3.14,0.607,4,4,0,-0.86
-WC2026-038,2026-06-21,New Zealand,Egypt,2026-06-21,2.98,0.572,,,,
-WC2026-039,2026-06-21,Spain,Saudi Arabia,2026-06-21,3.12,0.603,,,,
-WC2026-040,2026-06-21,Uruguay,Cape Verde,2026-06-21,3.32,0.645,,,,
+WC2026-037,2026-06-21,Belgium,Iran,2026-06-21,3.14,0.607,4.0,4.0,0.0,-0.86
+WC2026-038,2026-06-21,New Zealand,Egypt,2026-06-21,2.98,0.572,0.0,0.0,0.0,2.98
+WC2026-039,2026-06-21,Spain,Saudi Arabia,2026-06-21,3.12,0.603,4.0,2.0,2.0,-0.88
+WC2026-040,2026-06-21,Uruguay,Cape Verde,2026-06-21,3.32,0.645,4.0,1.0,3.0,-0.68
 WC2026-041,2026-06-22,France,Iraq,2026-06-21,3.25,0.63,,,,
 WC2026-042,2026-06-22,Norway,Senegal,2026-06-21,2.85,0.542,,,,
 WC2026-043,2026-06-22,Argentina,Austria,2026-06-21,4.02,0.765,,,,

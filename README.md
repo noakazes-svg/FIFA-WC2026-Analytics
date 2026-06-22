@@ -188,8 +188,6 @@ FIFA_analysis/
 |   +-- pipeline.py                    Full pipeline: fetch weather, engineer features, predict
 |   +-- build_dataset.py               Build 104-match schedule CSV from fixture data
 |
-+-- assets/                            LinkedIn post images and portfolio screenshots
-|
 +-- docs/
     +-- data_dictionary.md             Column docs with type, description, availability per match status
 ```
