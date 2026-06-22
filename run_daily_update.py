@@ -561,16 +561,18 @@ def run(target_dates: list[str], dry_run: bool = False):
     # ── 9. Update prediction history ─────────────────────────────────────────
     fresh_forecasts = pd.read_csv(FINAL / "remaining_match_forecasts.csv")
 
-    # Add new predictions to history
+    # Add new predictions to history — team names from world_cup (authoritative)
+    wc_idx = world_cup.set_index("match_id")
     pred_ids_in_history = set(pred_hist["match_id"].tolist()) if len(pred_hist) else set()
     for _, row in fresh_forecasts.iterrows():
         mid = row["match_id"]
         if mid not in pred_ids_in_history and pd.notna(row.get("predicted_total_goals")):
+            wc_row = wc_idx.loc[mid] if mid in wc_idx.index else None
             pred_hist = pd.concat([pred_hist, pd.DataFrame([{
                 "match_id":                mid,
-                "match_date":              row.get("match_date"),
-                "home_team":               row.get("home_team"),
-                "away_team":               row.get("away_team"),
+                "match_date":              wc_row["match_date"] if wc_row is not None else row.get("match_date"),
+                "home_team":               wc_row["home_team"]  if wc_row is not None else row.get("home_team"),
+                "away_team":               wc_row["away_team"]  if wc_row is not None else row.get("away_team"),
                 "prediction_date":         today_str,
                 "predicted_total_goals":   row.get("predicted_total_goals"),
                 "probability_over_2_5":    row.get("probability_over_2_5_goals"),
