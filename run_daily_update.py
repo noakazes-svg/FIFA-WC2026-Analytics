@@ -218,9 +218,8 @@ def _build_weather_row(match_id, raw):
 
 # ── Modeling ──────────────────────────────────────────────────────────────────
 
-def rebuild_modeling_dataset(t1, t2, t3):
+def rebuild_modeling_dataset(t1, t2, t3, world_cup=None):
     """Merge match + team_stats + weather into modeling_dataset.csv columns."""
-    from sklearn.impute import SimpleImputer
 
     t2s = t2.sort_values("match_id").copy()
 
@@ -248,11 +247,16 @@ def rebuild_modeling_dataset(t1, t2, t3):
            .join(home_avg).join(away_avg).join(home_con).join(away_con)
            .reset_index())
 
+    # Join goals from world_cup_matches — match_metadata.csv has no goal columns
+    if world_cup is not None:
+        goals = world_cup[["match_id","home_goals","away_goals"]].copy()
+        goals = goals[goals["home_goals"].notna()]
+        df = df.merge(goals, on="match_id", how="left")
+
     df["home_elo"]       = df["home_team"].map(ELO)
     df["away_elo"]       = df["away_team"].map(ELO)
     df["elo_difference"] = df["home_elo"] - df["away_elo"]
-    df["total_goals"]    = df.get("home_goals", pd.Series(dtype=float)) + \
-                           df.get("away_goals", pd.Series(dtype=float))
+    df["total_goals"]    = df["home_goals"] + df["away_goals"]
     df["precipitation_bucket"] = df.get("precipitation_mm", pd.Series(dtype=float)).apply(
         lambda x: _bucket(x, 0.1, 5.0, ("None","Light","Heavy")) if pd.notna(x) else None)
 
@@ -272,8 +276,24 @@ def rebuild_modeling_dataset(t1, t2, t3):
     ]
     return df[[c for c in keep if c in df.columns]]
 
+
+def _poisson_win_draw_loss(lambda_h, lambda_a, max_goals=8):
+    """Bivariate Poisson win/draw/loss probabilities."""
+    import math
+    win = draw = loss = 0.0
+    for h in range(max_goals + 1):
+        for a in range(max_goals + 1):
+            p = (math.exp(-lambda_h) * lambda_h**h / math.factorial(h) *
+                 math.exp(-lambda_a) * lambda_a**a / math.factorial(a))
+            if   h > a: win  += p
+            elif h == a: draw += p
+            else:        loss += p
+    total = win + draw + loss
+    return round(win/total, 3), round(draw/total, 3), round(loss/total, 3)
+
+
 def train_best_model(df_model):
-    """Retrain RF on all completed matches with weather. Return fitted model + imputer."""
+    """Train separate RF models for home_goals, away_goals, total_goals."""
     from sklearn.ensemble import RandomForestRegressor
     from sklearn.impute import SimpleImputer
 
@@ -285,25 +305,32 @@ def train_best_model(df_model):
         "home_avg_conceded_before","away_avg_conceded_before",
     ] if c in df_model.columns]
 
-    sub = df_model[feat_cols + ["total_goals"]].dropna(subset=["total_goals"])
+    sub = df_model[feat_cols + ["home_goals","away_goals","total_goals"]].dropna(subset=["total_goals"])
     if len(sub) < 6:
-        return None, None, feat_cols
+        log.info(f"Not enough completed matches to train ({len(sub)} rows) — skipping")
+        return None, None, None, None, feat_cols
 
     imp = SimpleImputer(strategy="median")
     X = imp.fit_transform(sub[feat_cols])
-    y = sub["total_goals"].values
-    rf = RandomForestRegressor(n_estimators=200, max_depth=4, random_state=42)
-    rf.fit(X, y)
-    log.info(f"Model trained on {len(y)} completed matches")
-    return rf, imp, feat_cols
+
+    rf_h = RandomForestRegressor(n_estimators=200, max_depth=4, random_state=42)
+    rf_h.fit(X, sub["home_goals"].values)
+
+    rf_a = RandomForestRegressor(n_estimators=200, max_depth=4, random_state=42)
+    rf_a.fit(X, sub["away_goals"].values)
+
+    log.info(f"Models trained on {len(sub)} completed matches (home + away goals)")
+    return rf_h, rf_a, imp, feat_cols
 
 # ── Prediction history ────────────────────────────────────────────────────────
 
 PRED_HISTORY_COLS = [
     "match_id","match_date","home_team","away_team",
-    "prediction_date","predicted_total_goals","probability_over_2_5",
-    "actual_total_goals","actual_home_goals","actual_away_goals",
-    "prediction_error",
+    "prediction_date",
+    "predicted_home_goals","predicted_away_goals","predicted_total_goals",
+    "win_probability","draw_probability","loss_probability","probability_over_2_5",
+    "actual_home_goals","actual_away_goals","actual_total_goals",
+    "home_goals_error","away_goals_error","prediction_error",
 ]
 
 def load_prediction_history():
@@ -412,7 +439,7 @@ def run(target_dates: list[str], dry_run: bool = False):
         log.info("No new completed matches — checking if forecast refresh needed")
         weather_fetched, weather_failed = 0, 0
         n_preds = _refresh_forecasts(world_cup, locations, forecasts, t1, t2, t3, dry_run)
-        _write_summary(today_str, [], 0, 0, n_preds, False, dq_issues, pred_hist, ROOT)
+        _write_summary(today_str, [], 0, 0, n_preds, False, dq_issues, None, ROOT)
         append_update_log(today_str, 0, 0, n_preds, False)
         return
 
@@ -535,19 +562,21 @@ def run(target_dates: list[str], dry_run: bool = False):
         log.info(f"weather_data.csv: {len(t3)} rows ({weather_fetched} new, {weather_failed} failed)")
 
     # ── 6. Rebuild modeling_dataset.csv ─────────────────────────────────────
-    df_model = rebuild_modeling_dataset(t1, t2, t3)
+    df_model = rebuild_modeling_dataset(t1, t2, t3, world_cup)
     df_model.to_csv(PROC / "modeling_dataset.csv", index=False)
-    log.info(f"modeling_dataset.csv: {len(df_model)} rows")
+    completed_rows = df_model["total_goals"].notna().sum()
+    log.info(f"modeling_dataset.csv: {len(df_model)} rows ({completed_rows} with goals)")
 
     # ── 7. Retrain models (if >= 3 new matches) ──────────────────────────────
     model_retrained = False
-    rf_model = None
-    rf_imp   = None
+    rf_home = None
+    rf_away = None
+    rf_imp  = None
     feat_cols = []
 
     if len(newly_completed) >= 3:
-        rf_model, rf_imp, feat_cols = train_best_model(df_model)
-        if rf_model is not None:
+        rf_home, rf_away, rf_imp, feat_cols = train_best_model(df_model)
+        if rf_home is not None:
             model_retrained = True
             _save_cv_results(df_model, feat_cols)
     else:
@@ -555,8 +584,8 @@ def run(target_dates: list[str], dry_run: bool = False):
 
     # ── 8. Refresh forecasts for upcoming matches ────────────────────────────
     n_preds = _refresh_forecasts(world_cup, locations, forecasts, t1, t2, t3, dry_run,
-                                 rf_model=rf_model, rf_imp=rf_imp, feat_cols=feat_cols,
-                                 df_model=df_model)
+                                 rf_home=rf_home, rf_away=rf_away, rf_imp=rf_imp,
+                                 feat_cols=feat_cols, df_model=df_model)
 
     # ── 9. Update prediction history ─────────────────────────────────────────
     fresh_forecasts = pd.read_csv(FINAL / "remaining_match_forecasts.csv")
@@ -569,31 +598,44 @@ def run(target_dates: list[str], dry_run: bool = False):
         if mid not in pred_ids_in_history and pd.notna(row.get("predicted_total_goals")):
             wc_row = wc_idx.loc[mid] if mid in wc_idx.index else None
             pred_hist = pd.concat([pred_hist, pd.DataFrame([{
-                "match_id":                mid,
-                "match_date":              wc_row["match_date"] if wc_row is not None else row.get("match_date"),
-                "home_team":               wc_row["home_team"]  if wc_row is not None else row.get("home_team"),
-                "away_team":               wc_row["away_team"]  if wc_row is not None else row.get("away_team"),
-                "prediction_date":         today_str,
-                "predicted_total_goals":   row.get("predicted_total_goals"),
-                "probability_over_2_5":    row.get("probability_over_2_5_goals"),
-                "actual_total_goals":      None,
-                "actual_home_goals":       None,
-                "actual_away_goals":       None,
-                "prediction_error":        None,
+                "match_id":               mid,
+                "match_date":             wc_row["match_date"] if wc_row is not None else row.get("match_date"),
+                "home_team":              wc_row["home_team"]  if wc_row is not None else row.get("home_team"),
+                "away_team":              wc_row["away_team"]  if wc_row is not None else row.get("away_team"),
+                "prediction_date":        today_str,
+                "predicted_home_goals":   row.get("predicted_home_goals"),
+                "predicted_away_goals":   row.get("predicted_away_goals"),
+                "predicted_total_goals":  row.get("predicted_total_goals"),
+                "win_probability":        row.get("win_probability"),
+                "draw_probability":       row.get("draw_probability"),
+                "loss_probability":       row.get("loss_probability"),
+                "probability_over_2_5":   row.get("probability_over_2_5_goals"),
+                "actual_home_goals":      None,
+                "actual_away_goals":      None,
+                "actual_total_goals":     None,
+                "home_goals_error":       None,
+                "away_goals_error":       None,
+                "prediction_error":       None,
             }])], ignore_index=True)
 
     # Fill actuals for newly completed matches
     for m in newly_completed:
         mid = m["match_id"]
-        actual_total = m["home_goals"] + m["away_goals"]
+        actual_h = m["home_goals"]
+        actual_a = m["away_goals"]
+        actual_total = actual_h + actual_a
         mask = pred_hist["match_id"] == mid
         if mask.any():
+            pred_hist.loc[mask, "actual_home_goals"]  = actual_h
+            pred_hist.loc[mask, "actual_away_goals"]  = actual_a
             pred_hist.loc[mask, "actual_total_goals"] = actual_total
-            pred_hist.loc[mask, "actual_home_goals"]  = m["home_goals"]
-            pred_hist.loc[mask, "actual_away_goals"]  = m["away_goals"]
-            pred_val = pred_hist.loc[mask, "predicted_total_goals"].iloc[0]
-            if pd.notna(pred_val):
-                pred_hist.loc[mask, "prediction_error"] = round(float(pred_val) - actual_total, 3)
+            row0 = pred_hist.loc[mask].iloc[0]
+            if pd.notna(row0.get("predicted_home_goals")):
+                pred_hist.loc[mask, "home_goals_error"] = round(float(row0["predicted_home_goals"]) - actual_h, 3)
+            if pd.notna(row0.get("predicted_away_goals")):
+                pred_hist.loc[mask, "away_goals_error"] = round(float(row0["predicted_away_goals"]) - actual_a, 3)
+            if pd.notna(row0.get("predicted_total_goals")):
+                pred_hist.loc[mask, "prediction_error"] = round(float(row0["predicted_total_goals"]) - actual_total, 3)
             log.info(f"  Prediction history updated for {mid}")
 
     save_prediction_history(pred_hist)
@@ -620,7 +662,8 @@ def run(target_dates: list[str], dry_run: bool = False):
 
 
 def _refresh_forecasts(world_cup, locations, old_forecasts, t1, t2, t3,
-                       dry_run, rf_model=None, rf_imp=None, feat_cols=None, df_model=None):
+                       dry_run, rf_home=None, rf_away=None, rf_imp=None,
+                       feat_cols=None, df_model=None):
     """Regenerate remaining_match_forecasts.csv for all non-completed matches."""
     upcoming = world_cup[world_cup["match_status"] != "Completed"].copy()
     if upcoming.empty:
@@ -693,7 +736,7 @@ def _refresh_forecasts(world_cup, locations, old_forecasts, t1, t2, t3,
         a_elo = ELO.get(away, 1750)
         elo_d = h_elo - a_elo
 
-        if rf_model is not None and rf_imp is not None and feat_cols:
+        if rf_home is not None and rf_away is not None and rf_imp is not None and feat_cols:
             feat_map = {
                 "rain_flag": 1 if rain > 0 else 0,
                 "precipitation_mm": prec,
@@ -707,23 +750,34 @@ def _refresh_forecasts(world_cup, locations, old_forecasts, t1, t2, t3,
                 "away_avg_conceded_before": mean_goals/2,
             }
             X_pred = rf_imp.transform([[feat_map.get(f, 0) for f in feat_cols]])
-            pred = max(0.5, round(float(rf_model.predict(X_pred)[0]), 2))
+            pred_h = max(0.1, round(float(rf_home.predict(X_pred)[0]), 2))
+            pred_a = max(0.1, round(float(rf_away.predict(X_pred)[0]), 2))
         else:
-            # Naive: mean + ELO adjustment
+            # Naive: ELO-adjusted split around mean
             elo_adj = elo_d / 2000.0
-            pred = max(0.5, round(mean_goals + elo_adj * 0.5, 2))
+            base = mean_goals / 2
+            pred_h = max(0.1, round(base + elo_adj * 0.5, 2))
+            pred_a = max(0.1, round(base - elo_adj * 0.5, 2))
+
+        pred = round(pred_h + pred_a, 2)
+        win_p, draw_p, loss_p = _poisson_win_draw_loss(pred_h, pred_a)
 
         row.update({
-            "forecast_temperature_c":   T,
+            "forecast_temperature_c":    T,
             "forecast_humidity_percent": RH,
             "forecast_precipitation_mm": round(prec, 2),
-            "forecast_heat_index_c":    hi,
-            "forecast_wet_bulb_c":      wb,
-            "forecast_wbgt_c":          wbgt,
-            "predicted_cooling_break":  cb_f,
-            "predicted_total_goals":    pred,
+            "forecast_heat_index_c":     hi,
+            "forecast_wet_bulb_c":       wb,
+            "forecast_wbgt_c":           wbgt,
+            "predicted_cooling_break":   cb_f,
+            "predicted_home_goals":      pred_h,
+            "predicted_away_goals":      pred_a,
+            "predicted_total_goals":     pred,
             "probability_over_2_5_goals": _poisson_over_25(pred),
-            "forecast_source":          "Open-Meteo Forecast API" if raw else "Naive (no forecast available)",
+            "win_probability":           win_p,
+            "draw_probability":          draw_p,
+            "loss_probability":          loss_p,
+            "forecast_source":           "Open-Meteo Forecast API" if raw else "Naive (no forecast available)",
         })
         n_preds += 1
         rows.append(row)
