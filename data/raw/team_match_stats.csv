@@ -95,3 +95,15 @@ WC2026-047,Panama,Croatia,0,1,Loss,-1
 WC2026-047,Croatia,Panama,1,0,Win,1
 WC2026-048,Colombia,DR Congo,1,0,Win,1
 WC2026-048,DR Congo,Colombia,0,1,Loss,-1
+WC2026-049,Switzerland,Canada,2,1,Win,1
+WC2026-049,Canada,Switzerland,1,2,Loss,-1
+WC2026-050,Bosnia-Herzegovina,Qatar,3,1,Win,2
+WC2026-050,Qatar,Bosnia-Herzegovina,1,3,Loss,-2
+WC2026-051,Scotland,Brazil,0,3,Loss,-3
+WC2026-051,Brazil,Scotland,3,0,Win,3
+WC2026-052,Morocco,Haiti,4,2,Win,2
+WC2026-052,Haiti,Morocco,2,4,Loss,-2
+WC2026-053,Czechia,Mexico,0,3,Loss,-3
+WC2026-053,Mexico,Czechia,3,0,Win,3
+WC2026-054,South Africa,South Korea,1,0,Win,1
+WC2026-054,South Korea,South Africa,0,1,Loss,-1
